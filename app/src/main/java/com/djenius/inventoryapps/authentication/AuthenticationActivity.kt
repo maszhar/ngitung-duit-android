@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.djenius.inventoryapps.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AuthenticationActivity: AppCompatActivity() {
     private lateinit var navController: NavController
 
