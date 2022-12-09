@@ -1,4 +1,4 @@
-package com.djenius.inventoryapps.authentication.login
+package com.djenius.inventoryapps.authentication.register
 
 import android.os.Bundle
 import android.view.LayoutInflater

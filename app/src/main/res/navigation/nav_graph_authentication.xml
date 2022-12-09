@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.djenius.inventoryapps.authentication.login.RegisterFragment"
+        android:name="com.djenius.inventoryapps.authentication.register.RegisterFragment"
         android:label="LoginFragment" />
 </navigation>
