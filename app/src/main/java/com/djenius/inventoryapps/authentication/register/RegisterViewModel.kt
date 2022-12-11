@@ -5,12 +5,12 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class RegisterViewModel @Inject constructor(): ViewModel() {
-    var firstName = ""
-    var lastName = ""
-    var email = ""
-    var password = ""
-    var passwordConfirmation = ""
-    var aggreeWithTos = false
+class RegisterViewModel @Inject constructor() : ViewModel() {
+    val form = RegisterForm()
 
+    fun register() {
+        if (form.validateAllInputs()) {
+
+        }
+    }
 }
