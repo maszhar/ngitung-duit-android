@@ -9,6 +9,7 @@
               <option name="preferredColumnWidths">
                 <map>
                   <entry key="172.16.0.3:38285" value="120" />
+                  <entry key="172.16.0.3:38733" value="120" />
                   <entry key="Duration" value="90" />
                   <entry key="Tests" value="360" />
                   <entry key="vivo&#10; V2157" value="120" />

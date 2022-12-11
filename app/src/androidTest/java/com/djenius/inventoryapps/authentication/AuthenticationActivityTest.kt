@@ -1,6 +1,8 @@
 package com.djenius.inventoryapps.authentication
 
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.activityScenarioRule
@@ -30,5 +32,22 @@ class AuthenticationActivityTest {
 
         onView(withId(R.id.register_btn)).check(matches(isDisplayed()))
         onView(withId(R.id.register_btn)).check(matches(withText(R.string.register)))
+    }
+
+    @Test
+    fun showBlankInputErrors() {
+        onView(withId(R.id.register_btn)).perform(click())
+
+        onView(withId(R.id.firstname_et)).check(matches(hasErrorText("First Name cannot be blank")))
+        onView(withId(R.id.lastname_et)).check(matches(hasErrorText("Last Name cannot be blank")))
+        onView(withId(R.id.email_et)).check(matches(hasErrorText("Email cannot be blank")))
+        onView(withId(R.id.password_et)).check(matches(hasErrorText("Password cannot be blank")))
+        onView(withId(R.id.password_confirm_et)).check(matches(hasErrorText("Password Confirmation cannot be blank")))
+    }
+
+    @Test
+    fun showInvalidEmailError() {
+        onView(withId(R.id.email_et)).perform(typeText("email"))
+        onView(withId(R.id.email_et)).check(matches(hasErrorText("Email must be an email")))
     }
 }

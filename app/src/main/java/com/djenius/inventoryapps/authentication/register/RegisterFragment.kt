@@ -23,6 +23,7 @@ class RegisterFragment: Fragment() {
 
         val viewModel: RegisterViewModel by viewModels()
         binding.viewmodel = viewModel
+        binding.form = viewModel.form
         return binding.root
     }
 }
