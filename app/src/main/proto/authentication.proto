@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+option java_package = "com.djenius.inventoryapps.authentication";
+option java_outer_classname = "AuthProto";
+
+package proto;
+
+service Authentication {
+    rpc Hello(HelloRequest) returns (HelloResponse) {}
+    rpc Register(RegisterRequest) returns (RegisterResponse) {}
+    rpc Login(LoginRequest) returns (LoginResponse) {}
+}
+
+message HelloRequest {
+}
+
+message HelloResponse {
+    string message = 1;
+}
+
+message RegisterRequest {
+    string email = 1;
+    string firstName = 2;
+    string lastName = 3;
+    string password = 4;
+    bool agreeTos = 5;
+}
+
+message RegisterResponse {
+    Result result = 1;
+    string message = 2;
+}
+
+enum Result {
+    SUCCESS = 0;
+    INVALID_FIELDS = 1;
+}
+
+message LoginRequest {
+    string email = 1;
+    string password = 2;
+}
+
+message LoginResponse {
+    LoginResult result = 1;
+    string message = 2;
+    string accessToken = 3;
+    string refreshToken = 4;
+}
+
+enum LoginResult {
+    LOGIN_SUCCESS = 0;
+    LOGIN_UNVERIFIED = 1;
+    LOGIN_INCORRECT_DATA = 2;
+    LOGIN_INVALID_FIELDS = 4;
+}
