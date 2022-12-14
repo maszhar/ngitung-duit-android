@@ -23,7 +23,12 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField 'String', 'AUTH_HOST', '"auth-staging-j2e3oisieq-et.a.run.app"'
+        }
         release {
+            buildConfigField 'String', 'AUTH_HOST', '""'
+
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -90,16 +95,14 @@ dependencies {
     implementation "com.google.protobuf:protobuf-kotlin-lite:$protobufVersion"
 
     // gRPC
-//    implementation 'javax.annotation:javax.annotation-api:1.3.2'
     implementation "io.grpc:grpc-stub:$grpcVersion"
     implementation "io.grpc:grpc-protobuf-lite:$grpcVersion"
     implementation "io.grpc:grpc-kotlin-stub:$grpcKotlinVersion"
     implementation "io.grpc:grpc-okhttp:$grpcVersion"
 
-
-    implementation 'io.grpc:grpc-netty-shaded:1.51.0'
-
+    // multidex
     implementation "androidx.multidex:multidex:2.0.1"
+
     kapt 'com.google.dagger:hilt-compiler:2.44'
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.assertj:assertj-core:3.23.1'

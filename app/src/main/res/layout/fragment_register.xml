@@ -1,119 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
             name="viewmodel"
             type="com.djenius.inventoryapps.authentication.register.RegisterViewModel" />
+
         <variable
             name="form"
             type="com.djenius.inventoryapps.authentication.register.RegisterForm" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/register_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/title_tv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/register"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/firstname_et"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:autofillHints="name"
-            android:hint="@string/first_name"
-            android:text="@={form.firstName}"
-            android:inputType="textCapWords"
-            android:onTextChanged="@{(text, st, be, co) -> form.validateFirstName(text)}"
-            app:error="@{form.firstNameError}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title_tv" />
+            <TextView
+                android:id="@+id/title_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/register"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/lastname_et"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:autofillHints="name"
-            android:hint="@string/last_name"
-            android:text="@={form.lastName}"
-            android:inputType="textCapWords"
-            android:onTextChanged="@{(text, st, be, co) -> form.validateLastName(text)}"
-            app:error="@{form.lastNameError}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/firstname_et" />
+            <EditText
+                android:id="@+id/firstname_et"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:autofillHints="name"
+                android:hint="@string/first_name"
+                android:inputType="textCapWords"
+                android:onTextChanged="@{(text, st, be, co) -> form.validateFirstName(text)}"
+                android:text="@={form.firstName}"
+                app:error="@{form.firstNameError}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_tv" />
 
-        <EditText
-            android:id="@+id/email_et"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:autofillHints="emailAddress"
-            android:hint="@string/email"
-            android:text="@={form.email}"
-            android:inputType="textEmailAddress"
-            android:onTextChanged="@{(text, st, be, co) -> form.validateEmail(text)}"
-            app:error="@{form.emailError}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lastname_et" />
+            <EditText
+                android:id="@+id/lastname_et"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:autofillHints="name"
+                android:hint="@string/last_name"
+                android:inputType="textCapWords"
+                android:onTextChanged="@{(text, st, be, co) -> form.validateLastName(text)}"
+                android:text="@={form.lastName}"
+                app:error="@{form.lastNameError}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/firstname_et" />
 
-        <EditText
-            android:id="@+id/password_et"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:autofillHints="password"
-            android:hint="@string/password"
-            android:text="@={form.password}"
-            android:inputType="textPassword"
-            android:onTextChanged="@{(text, st, be, co) -> form.validatePassword(text)}"
-            app:error="@{form.passwordError}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/email_et" />
+            <EditText
+                android:id="@+id/email_et"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:autofillHints="emailAddress"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:onTextChanged="@{(text, st, be, co) -> form.validateEmail(text)}"
+                android:text="@={form.email}"
+                app:error="@{form.emailError}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/lastname_et" />
 
-        <EditText
-            android:id="@+id/password_confirm_et"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:autofillHints="password"
-            android:hint="@string/password_confirmation"
-            android:text="@={form.passwordConfirmation}"
-            android:inputType="textPassword"
-            android:onTextChanged="@{(text, st, be, co) -> form.validatePasswordConfirmation(text)}"
-            app:error="@{form.passwordConfirmationError}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/password_et" />
+            <EditText
+                android:id="@+id/password_et"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:autofillHints="password"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:onTextChanged="@{(text, st, be, co) -> form.validatePassword(text)}"
+                android:text="@={form.password}"
+                app:error="@{form.passwordError}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/email_et" />
 
-        <CheckBox
-            android:id="@+id/tos_cb"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/agree_with_tos"
-            android:checked="@={form.agreeWithTos}"
-            app:error="@{form.agreeWithTosError}"
-            android:onCheckedChanged="@{(cb, checked) -> form.validateTosAgreement(checked)}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/password_confirm_et" />
+            <EditText
+                android:id="@+id/password_confirm_et"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:autofillHints="password"
+                android:hint="@string/password_confirmation"
+                android:inputType="textPassword"
+                android:onTextChanged="@{(text, st, be, co) -> form.validatePasswordConfirmation(text)}"
+                android:text="@={form.passwordConfirmation}"
+                app:error="@{form.passwordConfirmationError}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/password_et" />
 
-        <Button
-            android:id="@+id/register_btn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/register"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:onClick="@{() -> viewmodel.register()}"
-            app:layout_constraintTop_toBottomOf="@id/tos_cb" />
+            <CheckBox
+                android:id="@+id/tos_cb"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:checked="@={form.agreeWithTos}"
+                android:onCheckedChanged="@{(cb, checked) -> form.validateTosAgreement(checked)}"
+                android:text="@string/agree_with_tos"
+                app:error="@{form.agreeWithTosError}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/password_confirm_et" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/register_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:enabled="@{!viewmodel.loading}"
+                android:onClick="@{() -> viewmodel.register()}"
+                android:text="@string/register"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tos_cb" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

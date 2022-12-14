@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.djenius.inventoryapps.databinding.FragmentRegisterBinding
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RegisterFragment: Fragment() {
     private lateinit var binding: FragmentRegisterBinding
+    val viewModel: RegisterViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,9 +23,21 @@ class RegisterFragment: Fragment() {
         binding = FragmentRegisterBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        val viewModel: RegisterViewModel by viewModels()
         binding.viewmodel = viewModel
         binding.form = viewModel.form
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        observesData()
+    }
+
+    private fun observesData() {
+        viewModel.errorMsg.observe(viewLifecycleOwner) {
+            it?.let {
+                Snackbar.make(binding.registerLayout, it, Snackbar.LENGTH_LONG).show()
+            }
+        }
     }
 }
