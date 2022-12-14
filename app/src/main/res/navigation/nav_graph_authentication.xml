@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_authentication"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/registerFragment">
 
     <fragment
-        android:id="@+id/loginFragment"
+        android:id="@+id/registerFragment"
         android:name="com.djenius.inventoryapps.authentication.register.RegisterFragment"
-        android:label="LoginFragment" />
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_registerFragment_to_emailVerifyFragment"
+            app:destination="@id/emailVerifyFragment"
+            app:popUpTo="@id/registerFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/emailVerifyFragment"
+        android:name="com.djenius.inventoryapps.authentication.emailverify.EmailVerifyFragment"
+        android:label="EmailVerifyFragment"
+        tools:layout="@layout/fragment_email_verify" >
+        <argument
+            android:name="registeredEmail"
+            app:argType="string" />
+    </fragment>
 </navigation>
