@@ -3,14 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="viewmodel"
             type="com.djenius.inventoryapps.authentication.register.RegisterViewModel" />
-
         <variable
             name="form"
             type="com.djenius.inventoryapps.authentication.register.RegisterForm" />
+        <variable
+            name="fragment"
+            type="com.djenius.inventoryapps.authentication.register.RegisterFragment" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -118,7 +119,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:enabled="@{!viewmodel.loading}"
-                android:onClick="@{() -> viewmodel.register()}"
+                android:onClick="@{() -> fragment.register()}"
                 android:text="@string/register"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

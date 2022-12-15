@@ -7,8 +7,8 @@ import javax.inject.Inject
 class RegisterService @Inject constructor(
     private val grpcProvider: GrpcProvider
 ) {
-    fun register(req: AuthProto.RegisterRequest): AuthProto.RegisterResponse {
+    suspend fun register(request: AuthProto.RegisterRequest): AuthProto.RegisterResponse {
         val stub = grpcProvider.getAuthStub()
-        return stub.register(req)
+        return stub.register(request)
     }
 }

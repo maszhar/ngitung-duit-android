@@ -1,7 +1,7 @@
 package com.djenius.inventoryapps.utils
 
 import com.djenius.inventoryapps.BuildConfig
-import com.djenius.inventoryapps.authentication.AuthenticationGrpc
+import com.djenius.inventoryapps.authentication.AuthenticationGrpcKt
 import io.grpc.ManagedChannel
 import io.grpc.ManagedChannelBuilder
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +22,7 @@ class GrpcProvider @Inject constructor() {
             .build()
     }
 
-    fun getAuthStub(): AuthenticationGrpc.AuthenticationBlockingStub {
-        return AuthenticationGrpc.newBlockingStub(authChannel)
+    fun getAuthStub(): AuthenticationGrpcKt.AuthenticationCoroutineStub {
+        return AuthenticationGrpcKt.AuthenticationCoroutineStub(authChannel)
     }
 }

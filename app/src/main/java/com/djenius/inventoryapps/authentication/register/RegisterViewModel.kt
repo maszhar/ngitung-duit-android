@@ -5,44 +5,70 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.djenius.inventoryapps.authentication.AuthProto
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.grpc.Status
+import io.grpc.StatusException
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RegisterViewModel @Inject constructor() : ViewModel() {
-    @Inject lateinit var service: RegisterService
+class RegisterViewModel @Inject constructor(
+    private val repository: RegisterRepository
+) : ViewModel() {
     val form = RegisterForm()
     val loading = MutableLiveData(false)
     val success = MutableLiveData(false)
+    val error = MutableLiveData<RegisterError?>(null)
     val errorMsg = MutableLiveData<String?>(null)
+
+    fun clearError() {
+        error.postValue(null)
+    }
+
+    fun clearErrorMsg() {
+        errorMsg.postValue(null)
+    }
 
     fun register() {
         if (form.validateAllInputs()) {
             loading.postValue(true)
 
-            val request = AuthProto.RegisterRequest.newBuilder()
-                .setFirstName(form.firstName)
-                .setLastName(form.lastName)
-                .setEmail(form.email)
-                .setPassword(form.password)
-                .setAgreeTos(form.agreeWithTos)
-                .build()
-
             viewModelScope.launch {
-                val result = service.register(request)
-                when(result.result) {
-                    AuthProto.Result.INVALID_FIELDS -> {
-                        errorMsg.postValue("Please update the application")
+                try {
+                    val result = repository.register(
+                        form.firstName,
+                        form.lastName,
+                        form.email,
+                        form.password,
+                        form.agreeWithTos
+                    )
+                    when (result.result) {
+                        AuthProto.Result.INVALID_FIELDS -> {
+                            errorMsg.postValue("Please update the application")
+                        }
+                        AuthProto.Result.SUCCESS -> {
+                            success.postValue(true)
+                        }
+                        else -> {
+                            errorMsg.postValue("Error from server")
+                        }
                     }
-                    AuthProto.Result.SUCCESS -> {
-                        success.postValue(true)
+                } catch (e: StatusException) {
+                    when (e.status.code) {
+                        Status.UNAVAILABLE.code ->
+                            error.postValue(RegisterError.UNAVAILABLE)
+                        else ->
+                            errorMsg.postValue(e.status.toString())
                     }
-                    else -> {
-                        errorMsg.postValue("Error from server")
-                    }
+                } catch (e: Exception) {
+                    errorMsg.postValue(e.toString())
+                } finally {
+                    loading.postValue(false)
                 }
-                loading.postValue(false)
             }
         }
     }
+}
+
+enum class RegisterError {
+    UNAVAILABLE
 }

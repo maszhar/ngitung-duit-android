@@ -60,6 +60,9 @@ protobuf {
         grpc {
             artifact = "io.grpc:protoc-gen-grpc-java:$grpcVersion"
         }
+        grpckt {
+            artifact = "io.grpc:protoc-gen-grpc-kotlin:$grpcKotlinVersion:jdk8@jar"
+        }
     }
     generateProtoTasks {
         all().each { task ->
@@ -74,6 +77,9 @@ protobuf {
                 }
                 grpc {
                     option 'lite'
+                }
+                grpckt {
+                    option "lite"
                 }
             }
         }
